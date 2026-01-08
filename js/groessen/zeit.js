@@ -1,4 +1,4 @@
-let qc = 15;
+let qc = 10;
 
 document.addEventListener("DOMContentLoaded", () => {
     beginQuiz(createTaskZeit, qc);
@@ -23,31 +23,27 @@ function createTaskZeit() {
 
     const LIST = [];
 
-    // überarbeiten!!!!!!!
     for (let i = 0; i < qc; i++) {
         const unit = UNITS[randomNumber(0, UNITS.length - 1)];
         let value;
 
         if (unit.from === "ms" && unit.to === "s") {
-            value = randomNumber(1, 50) * 500;
+            value = randomNumber(1, 9) * 1000;
         }
         else if (unit.from === "s" && unit.to === "ms") {
             value = randomNumber(1, 20);
         }
         else if (unit.from === "s" && unit.to === "min") {
-            value = randomNumber(1, 100) * 60;
-        }
-        else if (unit.from === "s" && unit.to === "h") {
-            value = randomNumber(1, 10) * 3600;
+            value = randomNumber(1, 20) * 60;
         }
         else if (unit.from === "min" && unit.to === "s") {
-            value = randomNumber(1, 10) * 60;
+            value = randomNumber(1, 15);
         }
         else if (unit.from === "min" && unit.to === "h") {
-            value = randomNumber(1, 10) * 60;
+            value = randomNumber(1, 6) * 60;
         }
         else if (unit.from === "h" && unit.to === "min") {
-            value = randomNumber(1, 10);
+            value = randomNumber(1, 12);
         }
         else if (unit.from === "h" && unit.to === "d") {
             value = randomNumber(1, 3) * 24;
@@ -55,12 +51,17 @@ function createTaskZeit() {
         else if (unit.from === "d" && unit.to === "h") {
             value = randomNumber(1, 3);
         }
+        else {
+            console.error("Nicht behandelter Einheitentyp:", unit);
+            i--;
+            continue;
+        }
 
-        const solution = round(value * unit.factor, 6);
+        const SOLUTION = round(value * unit.factor, 6);
 
         LIST.push({
             text: `${value} ${unit.from} → ${unit.to}`,
-            solution
+            solution: SOLUTION
         });
     }
 

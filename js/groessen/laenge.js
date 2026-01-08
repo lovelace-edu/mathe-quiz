@@ -1,4 +1,4 @@
-let qc = 15; // Fragenanzahl
+let qc = 10; // Fragenanzahl
 
 document.addEventListener("DOMContentLoaded", () => {
     beginQuiz(createTaskLaenge, qc);
