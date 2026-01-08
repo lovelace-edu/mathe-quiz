@@ -1,0 +1,208 @@
+/* ========== Reset & Basis ========== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #f3f6fb;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 16px;
+}
+
+/* ========== Hauptcontainer ========== */
+.container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Überschriften ========== */
+h1 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+/* ========== Aufgabe ========== */
+.task {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 24px 0;
+}
+
+/* ========== Eingabefeld ========== */
+input[type="text"] {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px;
+    font-size: 1.4rem;
+    border-radius: 12px;
+    border: 2px solid #d0d7e2;
+    text-align: center;
+}
+
+/* ========== Button ========== */
+button {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.button-pruefen {
+    margin-top: 16px;
+    /* background-color: #9400d3; */
+    /* background-color: #bf3eff; */
+    /* background-color: #d02090; */
+    background-color: #9400d3;
+}
+
+.button-weiter {
+    margin-top: 16px;
+    /* background-color: #9400d3; */
+    /* background-color: #bf3eff; */
+    /* background-color: #d02090; */
+    background-color: #9400d3;
+}
+
+.button-zwischenstand {
+    margin-top: 16px;
+    /* background-color: #006400; */
+    /* background-color: #836fff; */
+    /* background-color: #B23AEE; */
+    color: black;
+    background-color: #FFD700;
+    margin-bottom: 16px;
+}
+
+.button-abbrechen, .button-abbrechen-groessen {
+    margin-top: 32px;
+    /* background-color: #006400; */
+    /* background-color: #836fff; */
+    color: black;
+    background-color: #FFD700;;
+}
+
+.button-auswertung, .button-auswertung-groessen {
+    margin-top: 16px;
+    padding: 14px;
+    width: 100%;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    background-color: #9400d3;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* ========== Feedback ========== */
+.feedback {
+    margin-top: 18px;
+    font-size: 1.3rem;
+}
+
+/* ========== Startseiten-Menü ========== */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.menu button {
+    display: block;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.button-homepage1 {
+    color: white;
+    /* background-color: #bf3eff; */
+    background-color: #9400d3; 
+
+    /* color: black;
+    background-color: aqua; */
+}
+
+.button-homepage2 {
+    color: black;
+    background-color: #ffd700;
+}
+
+.button-groessen, .button-brueche {
+    color: white;
+    /* background-color: #836fff; */
+    background-color: #9400d3;
+}
+
+.button-zurueck {
+    color: black;
+    background-color: #ffd700;
+}
+
+#quiz-view, #result-view {
+    width: 100%;
+}
+
+
+/* ========== Größere Bildschirme ========== */
+@media (min-width: 600px) {
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu button {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* ========== Sehr kleine Höhen (Querformat Handy) ========== */
+@media (max-height: 500px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        margin-top: 8px;
+    }
+}
