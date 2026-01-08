@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zweierpotenzen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/utils.js"></script>
+    <script src="../js/quiz-core.js"></script>
+    <script src="../js/zweierpotenzen.js"></script>
+</head>
+<body>
+    <div id="container" class="container">
+
+        <div id="quiz-view">
+            <h1>Potenzen</h1>
+            <p class="progress">Frage 1 / 15</p>
+            <p class="task"></p>
+            <input type="text" id="answer" inputmode="decimal">
+            <p id="feedback" class="feedback"></p>
+
+            <button class="button-pruefen">Prüfen</button>
+            <button class="button-weiter">Weiter</button>
+            <button class="button-abbrechen">Abbrechen</button>
+            <button class="button-zwischenstand">Zwischenstand</button>
+
+            <div class="intermediate" style="display:none"></div>
+        </div>
+
+        <div id="result-view" style="display:none">
+            <h1>Auswertung</h1>
+            <p id="result-text"></p>
+            <button class="button-auswertung" data-action="nochmal">Nochmal</button>
+            <button class="button-auswertung" data-action="startseite">Zurück zur Startseite</button>
+        </div>
+    </div>
+</body>
+</html>
