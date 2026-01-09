@@ -94,7 +94,7 @@ button {
     margin-bottom: 16px;
 }
 
-.button-abbrechen, .button-abbrechen-groessen {
+.button-abbrechen, .button-abbrechen-groessen , .button-abbrechen-brueche {
     margin-top: 32px;
     /* background-color: #006400; */
     /* background-color: #836fff; */
@@ -102,7 +102,7 @@ button {
     background-color: #FFD700;;
 }
 
-.button-auswertung, .button-auswertung-groessen {
+.button-auswertung, .button-auswertung-groessen, .button-auswertung-brueche {
     margin-top: 16px;
     padding: 14px;
     width: 100%;

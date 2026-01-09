@@ -37,11 +37,9 @@ function createTaskVolumen() {
             continue;
         }
 
-        const SOLUTION = round(value * unit.factor, 6);
-
         LIST.push({
             text: `${value} ${unit.from} → ${unit.to}`,
-            solution: SOLUTION
+            solution: round(value * unit.factor, 6)
         });
     }
 

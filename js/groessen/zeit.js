@@ -57,11 +57,11 @@ function createTaskZeit() {
             continue;
         }
 
-        const SOLUTION = round(value * unit.factor, 6);
+        if (value === null) continue;
 
         LIST.push({
             text: `${value} ${unit.from} → ${unit.to}`,
-            solution: SOLUTION
+            solution: round(value * unit.factor, 6)
         });
     }
 

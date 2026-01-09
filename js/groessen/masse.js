@@ -45,12 +45,10 @@ function createTaskMasse() {
         } else {
             value = randomNumber(1, 1000); // Standardwerte
         }
-        
-        const solution = round(value * unit.factor, 6);
 
         LIST.push({
             text: `${value} ${unit.from} → ${unit.to}`,
-            solution
+            solution: round(value * unit.factor, 6)
         });
     }
 
