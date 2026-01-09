@@ -37,12 +37,11 @@ function createTaskLaenge() {
     for (let i = 0; i < qc; i++) {
         let unit = UNITS[randomNumber(0, UNITS.length - 1)];
 
-        const value = randomValue(unit.from); // randomValue aus groesseneinheiten.js
-        const solution = round(value * unit.factor, 6);
+        const VALUE = randomValue(unit.from); // randomValue aus groesseneinheiten.js
 
         LIST.push({
-            text: `${value} ${unit.from} → ${unit.to}`,
-            solution
+            text: `${VALUE} ${unit.from} → ${unit.to}`,
+            solution: round(value * unit.factor, 6)
         });
     }
 

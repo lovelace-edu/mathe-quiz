@@ -93,11 +93,8 @@ function onWeiter() {
         btn.disabled = answers.length === 0;
     });
 
-    if (currentQuestion < questionCount) {
-        showTask();
-    } else {
-        showResult();
-    }
+    if (currentQuestion < questionCount) showTask();
+    else showResult();
 }
 
 // Quiz Zustand verwerfen & zurück zur Auswahlseite
@@ -152,6 +149,10 @@ function beginQuiz(createTaskFn, count = 10) {
     shuffle(POOL);
     tasks = POOL.slice(0, questionCount);
 
+    // Debugging
+    console.log("Tasks zurückgegeben:", tasks);
+    console.log("Tasks Länge:", tasks?.length);
+
     // Views vorbereiten
     document.querySelector("#quiz-view").style.display = "block";
     document.querySelector("#result-view").style.display = "none";
@@ -164,14 +165,21 @@ function beginQuiz(createTaskFn, count = 10) {
 
 // Antwort prüfen
 function checkAnswer(showFeedback) {
+
     // Roh-Eingabe holen
     const USER_INPUT = document.querySelector("#answer").value;
+    if (!USER_INPUT) return null;
 
     // Normalisieren (Leerzeichen + Komma)
     const INPUT_STRING = normalizeInput(USER_INPUT);
-    const INPUT = Number(INPUT_STRING);
 
-    if (INPUT_STRING === "" || isNaN(INPUT)) {
+    if (INPUT_STRING === "") {
+        alert("Bitte eine gültige Zahl eingeben");
+        return null;
+    }
+
+    const INPUT = Number(INPUT_STRING);
+    if (Number.isNaN(INPUT)) {
         alert("Bitte eine gültige Zahl eingeben");
         return null;
     }
@@ -199,7 +207,6 @@ function checkAnswer(showFeedback) {
 
 // Zwischenstand ein- & ausblenden
 function toggleIntermediate() {
-    // const EL = $("intermediate");
     const EL = document.querySelector(".intermediate");
 
     if(!EL) return;
@@ -223,7 +230,6 @@ function updateIntermediate(extra) {
     // Wenn die aktuelle Frage geprüft wurde, aber noch nicht weiter, addieren
     if (currentChecked && answers[currentQuestion] === undefined) {
         const CURRENT_TASK = tasks[currentQuestion];
-        // const INPUT_VALUE = Number($("answer").value);
          const INPUT_VALUE = Number(document.querySelector("#answer").value);
         if (!isNaN(INPUT_VALUE )) {
             total++;
@@ -231,12 +237,16 @@ function updateIntermediate(extra) {
         }
     }
 
-    // $("intermediate").textContent = `Richtig bisher: ${correct} von ${total}`;
     document.querySelector(".intermediate").textContent = `Richtig bisher: ${correct} von ${total}`;
 }
 
 function showTask() {
     const QUESTION = tasks[currentQuestion];
+
+    if (!QUESTION) {
+        console.error("Ungültiger Aufgabenindex:", currentQuestion, tasks);
+        return;
+    }
 
     document.querySelector(".progress").textContent =
         `Frage ${currentQuestion + 1} / ${questionCount}`;
