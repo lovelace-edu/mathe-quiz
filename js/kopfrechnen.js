@@ -26,8 +26,10 @@ function createTaskKopfrechnen() {
                 // Subtraktion, keine negativen Ergebnisse
                 const x = Math.max(i, j);
                 const y = Math.min(i, j);
+                
+                if (x === y) continue;
                 text = `${x} - ${y}`;
-                solution = x - y;
+                solution = x - y;              
             }
 
             LIST.push({ text, solution });

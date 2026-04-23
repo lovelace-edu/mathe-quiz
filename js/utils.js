@@ -35,3 +35,38 @@ function normalizeInput(value) {
         .replace(/\s+/g, "")   // alle Leerzeichen raus
         .replace(",", ".");    // deutsches Komma erlauben
 }
+
+// Bruchstring → {num, den}
+function parseFraction(str) {
+    if (!str.includes("/")) return null;
+
+    const [num, den] = str.split("/").map(Number);
+
+    if (isNaN(num) || isNaN(den) || den === 0) return null;
+
+    return { num, den };
+}
+
+// moderner euklidischer Algorithmus zur Bestimmung des ggT
+function gcd(a, b) {
+    while(b !== 0) {
+        let h = a % b;
+        a = b;
+        b = h;
+    }
+    return a;
+}
+
+// Bruch kürzen
+function simplifyFraction(num, den) {
+    const g = gcd(num, den);
+    return { num: num / g, den: den / g };
+}
+
+// Vergleich Brüche
+function fractionsEqual(a, b) {
+    const f1 = simplifyFraction(a.num, a.den);
+    const f2 = simplifyFraction(b.num, b.den);
+
+    return f1.num === f2.num && f1.den === f2.den;
+}

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", onAbbrechenBrueche)
     });
 
-    document.querySelectorAll(".button-auswertung").forEach(btn => {
+    document.querySelectorAll(".button-auswertung, .button-auswertung-startseite").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const action = e.currentTarget.dataset.action;
             if(action === "nochmal" && createTaskFnRef) {
@@ -68,6 +68,14 @@ let createTaskFnRef = null;
 
 let tasks = [];
 let answers = [];
+
+// Optional: Modul-spezifische checkAnswer-Funktion (z.B. für dezimal.js)
+// Wird mit registerCheckAnswer(fn) gesetzt, sonst greift die allgemeine Logik.
+let customCheckAnswerFn = null;
+
+function registerCheckAnswer(fn) {
+    customCheckAnswerFn = fn;
+}
 
 // zur nächsten Frage springen
 function onWeiter() {
@@ -149,10 +157,6 @@ function beginQuiz(createTaskFn, count = 10) {
     shuffle(POOL);
     tasks = POOL.slice(0, questionCount);
 
-    // Debugging
-    console.log("Tasks zurückgegeben:", tasks);
-    console.log("Tasks Länge:", tasks?.length);
-
     // Views vorbereiten
     document.querySelector("#quiz-view").style.display = "block";
     document.querySelector("#result-view").style.display = "none";
@@ -163,34 +167,34 @@ function beginQuiz(createTaskFn, count = 10) {
     showTask();
 }
 
-// Antwort prüfen
+// Allgemeine Antwortprüfung (numerisch, mit Komma-Support)
 function checkAnswer(showFeedback) {
 
-    // Roh-Eingabe holen
-    const USER_INPUT = document.querySelector("#answer").value;
-    if (!USER_INPUT) return null;
+    // Modul hat eine eigene Prüflogik registriert → diese verwenden
+    if (customCheckAnswerFn) {
+        return customCheckAnswerFn(tasks, currentQuestion, showFeedback);
+    }
 
-    // Normalisieren (Leerzeichen + Komma)
-    const INPUT_STRING = normalizeInput(USER_INPUT);
+    const raw = document.querySelector("#answer").value;
+    if (!raw) return null;
 
-    if (INPUT_STRING === "") {
+    const input = normalizeInput(raw);
+
+    if (input === "") {
         alert("Bitte eine gültige Zahl eingeben");
         return null;
     }
 
-    const INPUT = Number(INPUT_STRING);
-    if (Number.isNaN(INPUT)) {
+    const INPUT = Number(input);
+    if (isNaN(INPUT)) {
         alert("Bitte eine gültige Zahl eingeben");
         return null;
     }
 
     const TASK = tasks[currentQuestion];
-
-    // Eingabe und Lösung normalisieren
-    const USER_VALUE = normalizeNumber(INPUT);
-    const SOLUTION = normalizeNumber(TASK.solution);
-
-    const CORRECT = USER_VALUE === SOLUTION;
+    const USER_VALUE  = normalizeNumber(INPUT);
+    const SOLUTION    = normalizeNumber(TASK.solution);
+    const CORRECT     = USER_VALUE === SOLUTION;
 
     if (showFeedback) {
         document.querySelector(".feedback").textContent = CORRECT
@@ -219,22 +223,20 @@ function toggleIntermediate() {
     }
 }
 
-function updateIntermediate(extra) {
+function updateIntermediate() {
     let correct = 0;
     let total = answers.length;
 
     answers.forEach(item => {
-        if(item.answer === item.task.solution) correct++;
+        if(item.correct) correct++;
     });
 
     // Wenn die aktuelle Frage geprüft wurde, aber noch nicht weiter, addieren
     if (currentChecked && answers[currentQuestion] === undefined) {
-        const CURRENT_TASK = tasks[currentQuestion];
-         const INPUT_VALUE = Number(document.querySelector("#answer").value);
-        if (!isNaN(INPUT_VALUE )) {
-            total++;
-            if(INPUT_VALUE  === CURRENT_TASK.solution) correct++;
-        }
+        total++;
+        // Letzte geprüfte Antwort war korrekt, wenn currentChecked gesetzt wurde
+        const lastFeedback = document.querySelector(".feedback").textContent;
+        if (lastFeedback.startsWith("✅")) correct++;
     }
 
     document.querySelector(".intermediate").textContent = `Richtig bisher: ${correct} von ${total}`;
@@ -259,7 +261,7 @@ function showTask() {
 
 function showResult() {
     let correct = 0;
-    answers.forEach(item => { if(item.answer === item.task.solution) correct++; });
+    answers.forEach(item => { if(item.correct) correct++; });
 
     document.querySelector("#quiz-view").style.display = "none";
     document.querySelector("#result-view").style.display = "block";

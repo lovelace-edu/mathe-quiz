@@ -2,18 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Division</title>
+    <title>Dezimalbrüche</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/utils.js"></script>
-    <script src="../js/quiz-core.js"></script>
-    <script src="../js/division.js"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/quiz-core.js"></script>
+    <script src="../../js/fractions/fractions.js"></script>
+    <script src="../../js/fractions/dezimal.js"></script>
 </head>
 <body>
     <div id="container" class="container">
 
         <div id="quiz-view">
-            <h1>Division</h1>
+            <h1>Umrechnung von Brüchen</h1>
             <p class="progress">Frage 1 / 15</p>
             <p class="task"></p>
             <input type="text" id="answer" inputmode="decimal">
@@ -21,7 +22,7 @@
 
             <button class="button-pruefen">Prüfen</button>
             <button class="button-weiter">Weiter</button>
-            <button class="button-abbrechen">Abbrechen</button>
+            <button class="button-abbrechen-brueche">Abbrechen</button>
             <button class="button-zwischenstand">Zwischenstand</button>
 
             <div class="intermediate" style="display:none"></div>
@@ -31,7 +32,7 @@
             <h1>Auswertung</h1>
             <p id="result-text"></p>
             <button class="button-auswertung" data-action="nochmal">Nochmal</button>
-            <button class="button-auswertung-startseite" data-action="startseite">Zurück zur Startseite</button>
+            <button class="button-auswertung-brueche" data-action="auswahlseite">Zurück zur Auswahlseite</button>
         </div>
     </div>
 </body>

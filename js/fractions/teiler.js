@@ -23,13 +23,3 @@ function createTaskTeiler() {
 
     return LIST;
 }
-
-// moderner euklidischer Algorithmus zur Bestimmung des ggT
-function gcd(a, b) {
-    while(b !== 0) {
-        let h = a % b;
-        a = b;
-        b = h;
-    }
-    return a;
-}
