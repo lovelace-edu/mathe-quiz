@@ -1,23 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Eigene Prüflogik für Dezimal ↔ Bruch registrieren
-    registerCheckAnswer(checkAnswerDezimal);
+    registerCheckAnswer(checkAnswerDecimal);
     beginQuiz(createTaskDecimal, 10);
 });
 
 function createTaskDecimal() {
 
     const LIST = [
-        { fraction: "1/2", decimal: "0,5" },
+        { fraction: "1/2", decimal: "0,5"   },
         { fraction: "1/3", decimal: "0,333" },
-        { fraction: "1/4", decimal: "0,25" },
-        { fraction: "3/4", decimal: "0,75" },
+        { fraction: "2/3", decimal: "0,666" },
+        { fraction: "1/4", decimal: "0,25"  },
+        { fraction: "3/4", decimal: "0,75"  },
 
         { fraction: "1/5", decimal: "0,2" },
         { fraction: "2/5", decimal: "0,4" },
         { fraction: "3/5", decimal: "0,6" },
         { fraction: "4/5", decimal: "0,8" },
 
-        { fraction: "1/8", decimal: "0,125" },
+        { fraction: "1/8",  decimal: "0,125"  },
+        { fraction: "1/80", decimal: "0,0125" },
 
         { fraction: "1/10", decimal: "0,1" },
         { fraction: "2/10", decimal: "0,2" },
@@ -29,6 +30,11 @@ function createTaskDecimal() {
         { fraction: "1/50", decimal: "0,02" },
 
         { fraction: "1/100", decimal: "0,01" },
+        { fraction: "2/100", decimal: "0,02" },
+        { fraction: "5/100", decimal: "0,05" },
+        { fraction: "7/100", decimal: "0,07" },
+        { fraction: "8/100", decimal: "0,08" },
+
         { fraction: "1/200", decimal: "0,005" },
         { fraction: "1/500", decimal: "0,002" },
         { fraction: "1/1000", decimal: "0,001" }
@@ -36,9 +42,9 @@ function createTaskDecimal() {
 
     // Für jede Aufgabe zufällig Richtung wählen
     return LIST.map(item => {
-        const toDecimal = Math.random() < 0.5;
+        const TO_DECIMAL = Math.random() < 0.5;
 
-        if(toDecimal) {
+        if(TO_DECIMAL) {
             return {
                 text: `<b>${item.fraction}</b>`,
                 fraction: item.fraction,
@@ -58,31 +64,31 @@ function createTaskDecimal() {
     });
 }
 
-// Eigene Prüflogik: akzeptiert Dezimalzahl (mit Komma) oder Bruch
-function checkAnswerDezimal(tasks, currentQuestion, showFeedback) {
-    const raw = document.querySelector("#answer").value;
-    if (!raw) return null;
+// Funktion akzeptiert Dezimalzahl oder gemeinen Bruch
+function checkAnswerDecimal(tasks, currentQuestion, showFeedback) {
+    const RAW = document.querySelector("#answer").value;
+    if (!RAW) return null;
 
-    const input = normalizeInput(raw); // Komma → Punkt
+    const INPUT = normalizeInput(RAW); // Komma → Punkt
     const TASK  = tasks[currentQuestion];
 
     let correct = false;
 
     if (TASK.toDecimal) {
         // Erwartet: Dezimalzahl → numerisch vergleichen
-        const inputNum   = Number(input);
-        const solutionNum = Number(TASK.decimal.replace(",", "."));
+        const INPUT_NUM = Number(INPUT);
+        const SOLUTION_NUM = Number(TASK.decimal.replace(",", "."));
 
-        if (!isNaN(inputNum)) {
-            correct = Math.abs(inputNum - solutionNum) < 0.0001;
+        if (!isNaN(INPUT_NUM)) {
+            correct = Math.abs(INPUT_NUM - SOLUTION_NUM) < 0.0001;
         }
     } else {
         // Erwartet: Bruch → als Bruch vergleichen
-        const inputFrac    = parseFraction(input);
-        const solutionFrac = parseFraction(TASK.fraction);
+        const INPUT_FRAC = parseFraction(INPUT);
+        const SOLUTION_FRAC = parseFraction(TASK.fraction);
 
-        if (inputFrac && solutionFrac) {
-            correct = fractionsEqual(inputFrac, solutionFrac);
+        if (INPUT_FRAC && SOLUTION_FRAC) {
+            correct = fractionsEqual(INPUT_FRAC, SOLUTION_FRAC);
         }
     }
 
@@ -94,7 +100,7 @@ function checkAnswerDezimal(tasks, currentQuestion, showFeedback) {
 
     return {
         task: TASK,
-        answer: input,
+        answer: INPUT,
         correct
     };
 }
