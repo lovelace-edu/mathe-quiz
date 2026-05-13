@@ -3,58 +3,50 @@
 // Event Listener
 document.addEventListener("DOMContentLoaded", () => {
     
-    document.querySelectorAll(".button-weiter").forEach(btn => {
-        btn.addEventListener("click", onWeiter);
+    document.querySelectorAll(".button-next").forEach(btn => {
+        btn.addEventListener("click", onNext);
     });
 
-    document.querySelectorAll(".button-pruefen").forEach(btn => {
-        btn.addEventListener("click", onPruefen);
+    document.querySelectorAll(".button-check").forEach(btn => {
+        btn.addEventListener("click", onCheck);
     });
 
-    document.querySelectorAll(".button-zwischenstand").forEach(btn => {
+    document.querySelectorAll(".button-intermediate").forEach(btn => {
         btn.addEventListener("click", toggleIntermediate);
     });
 
-    document.querySelectorAll(".button-abbrechen").forEach(btn => {
-        btn.addEventListener("click", onAbbrechen);
+    document.querySelectorAll(".button-cancel").forEach(btn => {
+        btn.addEventListener("click", () => onCancel(btn.dataset.target));
     });
 
-    document.querySelectorAll(".button-abbrechen-groessen").forEach(btn => {
-        btn.addEventListener("click", onAbbrechenGroessen)
-    });
-
-    document.querySelectorAll(".button-abbrechen-brueche").forEach(btn => {
-        btn.addEventListener("click", onAbbrechenBrueche)
-    });
-
-    document.querySelectorAll(".button-auswertung, .button-auswertung-startseite").forEach(btn => {
+    document.querySelectorAll(".button-result, .button-result-home").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            const action = e.currentTarget.dataset.action;
-            if(action === "nochmal" && createTaskFnRef) {
+            const ACTION = e.currentTarget.dataset.action;
+            if(ACTION === "retry" && createTaskFnRef) {
                 beginQuiz(createTaskFnRef, questionCount);
-            } else if(action === "startseite") {
+            } else if(ACTION === "home") {
                 window.location.href = "../index.html";
             }
         });
     }); 
 
-    document.querySelectorAll(".button-auswertung-groessen").forEach(btn => {
+    document.querySelectorAll(".button-result-units").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            const action = e.currentTarget.dataset.action;
-            if(action === "nochmal" && createTaskFnRef) {
+            const ACTION = e.currentTarget.dataset.action;
+            if(ACTION === "retry" && createTaskFnRef) {
                 beginQuiz(createTaskFnRef, questionCount);
-            } else if(action === "auswahlseite") {
-                window.location.href = "groesseneinheiten.html";
+            } else if(ACTION === "selection") {
+                window.location.href = "units.html";
             }
         });
     });
 
-    document.querySelectorAll(".button-auswertung-brueche").forEach(btn => {
+    document.querySelectorAll(".button-result-fractions").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            const action = e.currentTarget.dataset.action;
-            if(action === "nochmal" && createTaskFnRef) {
+            const ACTION = e.currentTarget.dataset.action;
+            if(ACTION === "retry" && createTaskFnRef) {
                 beginQuiz(createTaskFnRef, questionCount);
-            } else if(action === "auswahlseite") {
+            } else if(ACTION === "selection") {
                 window.location.href = "fractions.html";
             }
         });
@@ -78,7 +70,7 @@ function registerCheckAnswer(fn) {
 }
 
 // zur nächsten Frage springen
-function onWeiter() {
+function onNext() {
     let result;
 
     if (!currentChecked) {
@@ -97,7 +89,7 @@ function onWeiter() {
     document.querySelector(".intermediate").style.display = "none";
 
     // Zwischenstand nur aktiv, wenn mindestens eine Antwort vorhanden
-    document.querySelectorAll(".button-zwischenstand").forEach(btn => {
+    document.querySelectorAll(".button-intermediate").forEach(btn => {
         btn.disabled = answers.length === 0;
     });
 
@@ -106,37 +98,17 @@ function onWeiter() {
 }
 
 // Quiz Zustand verwerfen & zurück zur Auswahlseite
-function onAbbrechen() {
+function onCancel(target) {
     if(confirm("Quiz wirklich abbrechen?")) {
         tasks = [];
         answers = [];
         currentQuestion = 0;
         currentChecked = false;
-        window.location.href = "../index.html";
+        window.location.href = target;
     }
 }
 
-function onAbbrechenGroessen() {
-    if(confirm("Quiz wirklich abbrechen?")) {
-        tasks = [];
-        answers = [];
-        currentQuestion = 0;
-        currentChecked = false;
-        window.location.href = "groesseneinheiten.html";
-    }
-}
-
-function onAbbrechenBrueche() {
-    if(confirm("Quiz wirklich abbrechen?")) {
-        tasks = [];
-        answers = [];
-        currentQuestion = 0;
-        currentChecked = false;
-        window.location.href = "fractions.html";
-    }
-}
-
-function onPruefen() {
+function onCheck() {
     const RESULT = checkAnswer(true);
     if(!RESULT) return;
     currentChecked = true; // markiert Frage als geprüft
@@ -160,9 +132,9 @@ function beginQuiz(createTaskFn, count = 10) {
     // Views vorbereiten
     document.querySelector("#quiz-view").style.display = "block";
     document.querySelector("#result-view").style.display = "none";
-    const intermediateEl = document.querySelector(".intermediate");
-    intermediateEl.style.display = "none";
-    intermediateEl.textContent = "";
+    const INTERMEDIATE_EL = document.querySelector(".intermediate");
+    INTERMEDIATE_EL.style.display = "none";
+    INTERMEDIATE_EL.textContent = "";
 
     showTask();
 }
@@ -175,26 +147,26 @@ function checkAnswer(showFeedback) {
         return customCheckAnswerFn(tasks, currentQuestion, showFeedback);
     }
 
-    const raw = document.querySelector("#answer").value;
-    if (!raw) return null;
+    const RAW = document.querySelector("#answer").value;
+    if (!RAW) return null;
 
-    const input = normalizeInput(raw);
+    const INPUT_R = normalizeInput(RAW);
 
-    if (input === "") {
+    if (INPUT_R === "") {
         alert("Bitte eine gültige Zahl eingeben");
         return null;
     }
 
-    const INPUT = Number(input);
+    const INPUT = Number(INPUT_R);
     if (isNaN(INPUT)) {
         alert("Bitte eine gültige Zahl eingeben");
         return null;
     }
 
     const TASK = tasks[currentQuestion];
-    const USER_VALUE  = normalizeNumber(INPUT);
-    const SOLUTION    = normalizeNumber(TASK.solution);
-    const CORRECT     = USER_VALUE === SOLUTION;
+    const USER_VALUE = normalizeNumber(INPUT);
+    const SOLUTION = normalizeNumber(TASK.solution);
+    const CORRECT = USER_VALUE === SOLUTION;
 
     if (showFeedback) {
         document.querySelector(".feedback").textContent = CORRECT
@@ -215,7 +187,7 @@ function toggleIntermediate() {
 
     if(!EL) return;
 
-    if(EL.style.display == "none" || EL.style.display === "") {
+    if(EL.style.display === "none" || EL.style.display === "") {
         updateIntermediate();
         EL.style.display = "block"; // einblenden
     } else {
@@ -235,8 +207,8 @@ function updateIntermediate() {
     if (currentChecked && answers[currentQuestion] === undefined) {
         total++;
         // Letzte geprüfte Antwort war korrekt, wenn currentChecked gesetzt wurde
-        const lastFeedback = document.querySelector(".feedback").textContent;
-        if (lastFeedback.startsWith("✅")) correct++;
+        const LAST_FEEDBACK = document.querySelector(".feedback").textContent;
+        if (LAST_FEEDBACK.startsWith("✅")) correct++;
     }
 
     document.querySelector(".intermediate").textContent = `Richtig bisher: ${correct} von ${total}`;

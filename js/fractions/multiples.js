@@ -1,10 +1,10 @@
 let qc = 10; // Fragenanzahl
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskVielfache, qc);
+    beginQuiz(createTaskMultiples, qc);
 });
 
-function createTaskVielfache() {
+function createTaskMultiples() {
     const LIST = [];
 
     while(LIST.length < qc) {

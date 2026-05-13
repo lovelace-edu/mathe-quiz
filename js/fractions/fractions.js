@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Buttons für Themengebiete
-    document.querySelectorAll(".button-brueche").forEach(btn => {
+    document.querySelectorAll(".button-fractions").forEach(btn => {
         btn.addEventListener("click", () => {
             if (btn.dataset.target) {
                 window.location.href = btn.dataset.target;
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Zurück-Button
-    document.querySelectorAll(".button-zurueck").forEach(btn => {
+    document.querySelectorAll(".button-back").forEach(btn => {
         btn.addEventListener("click", () => {
             if (btn.dataset.target) {
                 window.location.href = btn.dataset.target;

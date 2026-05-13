@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskDivision, 15);
+    beginQuiz(createTaskDiv, 15);
 });
 
-function createTaskDivision() {
+function createTaskDiv() {
     const LIST = [];
 
     for (let b = 2; b <= 10; b++) {

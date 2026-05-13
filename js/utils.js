@@ -17,8 +17,8 @@ function round(value, decimals = 3) {
 // Array mischen (für Fragen Liste)
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-        const j = randomNumber(0, i);
-        [array[i], array[j]] = [array[j], array[i]];
+        const J = randomNumber(0, i);
+        [array[i], array[J]] = [array[J], array[i]];
     }
 }
 
@@ -59,14 +59,14 @@ function gcd(a, b) {
 
 // Bruch kürzen
 function simplifyFraction(num, den) {
-    const g = gcd(num, den);
-    return { num: num / g, den: den / g };
+    const G = gcd(num, den);
+    return { num: num / G, den: den / G };
 }
 
 // Vergleich Brüche
 function fractionsEqual(a, b) {
-    const f1 = simplifyFraction(a.num, a.den);
-    const f2 = simplifyFraction(b.num, b.den);
+    const F1 = simplifyFraction(a.num, a.den);
+    const F2 = simplifyFraction(b.num, b.den);
 
-    return f1.num === f2.num && f1.den === f2.den;
+    return F1.num === F2.num && F1.den === F2.den;
 }

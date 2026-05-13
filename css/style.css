@@ -65,30 +65,30 @@ button {
     cursor: pointer;
 }
 
-.button-pruefen {
+.button-check {
     margin-top: 16px;
     background-color: #9400d3;
 }
 
-.button-weiter {
+.button-next {
     margin-top: 16px;
     background-color: #9400d3;
 }
 
-.button-zwischenstand {
+.button-intermediate {
     margin-top: 16px;
     color: black;
     background-color: #FFD700;
     margin-bottom: 16px;
 }
 
-.button-abbrechen, .button-abbrechen-groessen , .button-abbrechen-brueche {
+.button-cancel, .button-cancel-units , .button-cancel-fractions {
     margin-top: 32px;
     color: black;
     background-color: #FFD700;
 }
 
-.button-auswertung {
+.button-result {
     margin-top: 16px;
     padding: 14px;
     width: 100%;
@@ -100,7 +100,7 @@ button {
     cursor: pointer;
 }
 
-.button-auswertung-startseite, .button-auswertung-groessen, .button-auswertung-brueche {
+.button-result-home, .button-result-units, .button-result-fractions {
     padding: 14px;
     width: 100%;
     font-size: 1.3rem;
@@ -155,12 +155,12 @@ button:active {
     background-color: #ffd700;
 }
 
-.button-groessen, .button-brueche {
+.button-units, .button-fractions {
     color: white;
     background-color: #9400d3;
 }
 
-.button-zurueck {
+.button-back {
     color: black;
     background-color: #ffd700;
 }
@@ -169,8 +169,6 @@ button:active {
     width: 100%;
 }
 
-
-/* Größere Bildschirme */
 @media (min-width: 600px) {
     .menu {
         flex-direction: row;
@@ -186,16 +184,5 @@ button:active {
 @media (min-width: 768px) {
     html {
         font-size: 18px;
-    }
-}
-
-/* Sehr kleine Höhen (Querformat Handy) */
-@media (max-height: 500px) {
-    body {
-        align-items: flex-start;
-    }
-
-    .container {
-        margin-top: 8px;
     }
 }

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskPotenzen, 10);
+    beginQuiz(createTaskPowers, 10);
 });
 
 // erlaubte Aufgaben
@@ -46,7 +46,7 @@ const POWERS = [
     { base: 4, exp: 0 }, // 1
 ];
 
-function createTaskPotenzen() {
+function createTaskPowers() {
     return POWERS.map(p => ({
         text: `${p.base}<sup>${p.exp}</sup>`,
         solution: Math.pow(p.base, p.exp)

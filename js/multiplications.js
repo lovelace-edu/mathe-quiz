@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskEinmaleins, 15);
+    beginQuiz(createTaskMul, 15);
 });
 
 // Aufgabe erstellen aus zufälligen Zahlen zwischen 0 & 10
-function createTaskEinmaleins() {
+function createTaskMul() {
     const LIST = [];
 
     // eindeutige Paare erstellen

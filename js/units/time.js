@@ -1,10 +1,10 @@
 let qc = 10;
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskZeit, qc);
+    beginQuiz(createTaskTime, qc);
 });
 
-function createTaskZeit() {
+function createTaskTime() {
     const UNITS = [
         { from: "ms",  to: "s",   factor: 0.001 },
 

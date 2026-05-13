@@ -8,7 +8,7 @@
     <script src="../../js/utils.js"></script>
     <script src="../../js/quiz-core.js"></script>
     <script src="../../js/fractions/fractions.js"></script>
-    <script src="../../js/fractions/vielfache.js"></script>
+    <script src="../../js/fractions/multiples.js"></script>
 </head>
 <body>
     <div id="container" class="container">
@@ -20,10 +20,10 @@
             <input type="text" id="answer" inputmode="decimal">
             <p id="feedback" class="feedback"></p>
 
-            <button class="button-pruefen">Prüfen</button>
-            <button class="button-weiter">Weiter</button>
-            <button class="button-abbrechen-brueche">Abbrechen</button>
-            <button class="button-zwischenstand">Zwischenstand</button>
+            <button class="button-check">Prüfen</button>
+            <button class="button-next">Weiter</button>
+            <button class="button-cancel" data-target="fractions.html">Abbrechen</button>
+            <button class="button-intermediate">Zwischenstand</button>
 
             <div class="intermediate" style="display:none"></div>
         </div>
@@ -31,8 +31,8 @@
         <div id="result-view" style="display:none">
             <h1>Auswertung</h1>
             <p id="result-text"></p>
-            <button class="button-auswertung" data-action="nochmal">Nochmal</button>
-            <button class="button-auswertung-brueche" data-action="auswahlseite">Zurück zur Auswahlseite</button>
+            <button class="button-result" data-action="retry">Nochmal</button>
+            <button class="button-result-fractions" data-action="selection">Zurück zur Auswahlseite</button>
         </div>
 
     </div>

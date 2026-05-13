@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    registerCheckAnswer(checkAnswerPercent);
-    beginQuiz(createTaskPercent, 10);
+    registerCheckAnswer(checkAnswerPercentages);
+    beginQuiz(createTaskPercentages, 10);
 });
 
-function createTaskPercent() {
+function createTaskPercentages() {
     const LIST_FRACTIONS = [
         { fraction: "1/2", decimal: "0,5",   percent:"50"   },
         { fraction: "1/3", decimal: "0,333", percent:"33" },
@@ -64,7 +64,7 @@ function createTaskPercent() {
     });
 }
 
-function checkAnswerPercent(tasks, currentQuestion, showFeedback) {
+function checkAnswerPercentages(tasks, currentQuestion, showFeedback) {
     const RAW = document.querySelector("#answer").value;
     if (!RAW) return null;
 

@@ -1,10 +1,10 @@
 let qc = 10; // Fragenanzahl
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskTeiler, qc);
+    beginQuiz(createTaskDivisors, qc);
 });
 
-function createTaskTeiler() {
+function createTaskDivisors() {
     const LIST = [];
 
     while(LIST.length < qc) {

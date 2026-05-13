@@ -1,10 +1,10 @@
 let qc = 10; // Fragenanzahl
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskLaenge, qc);
+    beginQuiz(createTaskLength, qc);
 });
 
-function createTaskLaenge() {
+function createTaskLength() {
     const UNITS = [
         { from: "mm", to: "cm", factor: 0.1 },
         { from: "mm", to: "dm", factor: 0.01 },

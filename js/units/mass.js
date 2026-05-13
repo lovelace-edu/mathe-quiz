@@ -1,10 +1,10 @@
 let qc = 10; // Anzahl Fragen
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskMasse, qc);
+    beginQuiz(createTaskMass, qc);
 });
 
-function createTaskMasse() {
+function createTaskMass() {
     const UNITS = [
         { from: "mg", to: "g" , factor: 0.001 },
 

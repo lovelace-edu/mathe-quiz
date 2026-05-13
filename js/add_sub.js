@@ -1,10 +1,10 @@
 let questions = 15;
 
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskKopfrechnen, questions);
+    beginQuiz(createTaskAddSub, questions);
 });
 
-function createTaskKopfrechnen() {
+function createTaskAddSub() {
     const LIST = [];
 
     for (let i = 1; i <= 50; i++) {
