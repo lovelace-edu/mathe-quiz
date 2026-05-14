@@ -1,7 +1,5 @@
-let questions = 15;
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskAddSub, questions);
+    beginQuiz(createTaskAddSub, 15);
 });
 
 function createTaskAddSub() {
@@ -16,7 +14,7 @@ function createTaskAddSub() {
                 // Reihenfolge der Summanden mischen
                 if(Math.random() < 0.5) {
                     let tmp = i;
-                    i = j;;
+                    i = j;
                     j = tmp;
                 }
 
@@ -40,5 +38,5 @@ function createTaskAddSub() {
     shuffle(LIST);
 
     // Slice auf die gewünschte Anzahl (z. B. 15 Fragen)
-    return LIST.slice(0, questions);
+    return LIST.slice(0, questionCount);
 }

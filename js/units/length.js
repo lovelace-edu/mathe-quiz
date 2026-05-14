@@ -1,7 +1,5 @@
-let qc = 10; // Fragenanzahl
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskLength, qc);
+    beginQuiz(createTaskLength, 10); // questionCount = 10
 });
 
 function createTaskLength() {
@@ -34,7 +32,7 @@ function createTaskLength() {
 
     const LIST = [];
 
-    for (let i = 0; i < qc; i++) {
+    for (let i = 0; i < questionCount; i++) {
         let unit = UNITS[randomNumber(0, UNITS.length - 1)];
 
         let value = randomValue(unit.from); // randomValue aus groesseneinheiten.js

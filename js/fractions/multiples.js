@@ -1,16 +1,14 @@
-let qc = 10; // Fragenanzahl
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskMultiples, qc);
+    beginQuiz(createTaskMultiples, 10);
 });
 
 function createTaskMultiples() {
     const LIST = [];
 
-    while(LIST.length < qc) {
+    while(LIST.length < questionCount) {
         const A = randomNumber(2, 20);
         const B = randomNumber(2, 20);
-        const SOLUTION = scd(A, B);
+        const SOLUTION = lcm(A, B);
 
         if(A !== B && SOLUTION <= 50) {
             LIST.push({
@@ -23,17 +21,7 @@ function createTaskMultiples() {
     return LIST;
 }
 
-// moderner euklidischer Algorithmus zur Bestimmung des ggT
-function gcd(a, b) {
-    while(b !== 0) {
-        let h = a % b;
-        a = b;
-        b = h;
-    }
-    return a;
-}
-
-// kleinster gemeinsamer Teiler (smallest common divisor)
-function scd(a,b) {
+// kleinster gemeinsamer Teiler (least common multiple)
+function lcm(a,b) {
     return (a * b) / gcd(a, b);
 }

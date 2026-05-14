@@ -1,7 +1,5 @@
-let qc = 10;
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskVolume, qc);
+    beginQuiz(createTaskVolume, 10);
 });
 
 function createTaskVolume() {
@@ -14,7 +12,7 @@ function createTaskVolume() {
 
     const LIST = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < questionCount; i++) {
         const UNIT = UNITS[randomNumber(0, UNITS.length - 1)];
         let value;
 

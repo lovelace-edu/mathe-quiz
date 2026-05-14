@@ -1,7 +1,5 @@
-let qc = 10;
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskTime, qc);
+    beginQuiz(createTaskTime, 10);
 });
 
 function createTaskTime() {
@@ -23,7 +21,7 @@ function createTaskTime() {
 
     const LIST = [];
 
-    for (let i = 0; i < qc; i++) {
+    for (let i = 0; i < questionCount; i++) {
         const unit = UNITS[randomNumber(0, UNITS.length - 1)];
         let value;
 

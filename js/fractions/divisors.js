@@ -1,13 +1,11 @@
-let qc = 10; // Fragenanzahl
-
 document.addEventListener("DOMContentLoaded", () => {
-    beginQuiz(createTaskDivisors, qc);
+    beginQuiz(createTaskDivisors, 10);
 });
 
 function createTaskDivisors() {
     const LIST = [];
 
-    while(LIST.length < qc) {
+    while(LIST.length < questionCount) {
         const A = randomNumber(6, 50);
         const B = randomNumber(6, 50);
 
